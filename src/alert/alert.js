@@ -23,9 +23,12 @@ angular.module('ui.bootstrap.alert', [])
   return {
     require: 'alert',
     link: function(scope, element, attrs, alertCtrl) {
-      $timeout(function(){
-        alertCtrl.close();
-      }, parseInt(attrs.dismissOnTimeout, 10));
+      var dismissOnTimeout = parseInt(attrs.dismissOnTimeout, 10);
+      if(dismissOnTimeout) {
+        $timeout(function(){
+          alertCtrl.close();
+        }, dismissOnTimeout);
+      }
     }
   };
 }]);
