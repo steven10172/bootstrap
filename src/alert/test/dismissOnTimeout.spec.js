@@ -18,4 +18,13 @@ describe('dismissOnTimeout', function () {
     $timeout.flush();
     expect(scope.removeAlert).toHaveBeenCalled();
   });
+  
+  it('should not close automatically if auto-dismiss is an invalid integer', function () {
+    scope.removeAlert = jasmine.createSpy();
+    $compile('<alert close="removeAlert()" dismiss-on-timeout="">Default alert!</alert>')(scope);
+    scope.$digest();
+
+    $timeout.flush();
+    expect(scope.removeAlert).not.toHaveBeenCalled();
+  });
 });
